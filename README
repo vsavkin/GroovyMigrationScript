@@ -1,6 +1,7 @@
 Simple Groovy script for performing migrations using Liquidbase.
 
 Basic use cases:
+---------------------------
 
 1. Updating a database:
 MigrationScript.groovy 'db.properties', 'migrate', 'changeset.groovy' - Performs migration using a groovy changeset file.
@@ -35,3 +36,9 @@ MigrationScript.groovy 'db.properties', 'tag', 'mytag'
 3. Rolling back a migration
 MigrationScript.groovy 'db.properties', 'rollback',  'changeset.groovy', 'mytag' - Performs rolling back of all migrations till 'mytag' tag
 MigrationScript.groovy 'db.properties', 'rollback',  'changeset.groovy', 2 - Rolls back 2 last changesets
+
+
+
+Additional notes:
+---------------------------
+lib contains a mysql driver. If the database you migrate is different replace the driver.
