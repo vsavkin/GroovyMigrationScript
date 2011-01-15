@@ -1,0 +1,37 @@
+Simple Groovy script for performing migrations using Liquidbase.
+
+Basic use cases:
+
+1. Updating a database:
+MigrationScript.groovy 'db.properties', 'migrate', 'changeset.groovy' - Performs migration using a groovy changeset file.
+MigrationScript.groovy 'db.properties', 'migrate', 'changeset.xml' - Performs migration using an xml changeset file.
+
+NOTES:
+Groovy changeset file contains only changesets and doesn't contain a root element.
+changeSet(author: 'Victor Savkinn', id: 'changset1') {
+...
+}
+changeSet(author: 'Victor Savkinn', id: 'changset2') {
+...
+}
+
+XXML changeset file must contain a root element:
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet id="custom_sql" author="Victor Savkin">
+		...
+	</changeSet>
+
+</databaseChangeLog>
+
+2. Setting a tag
+MigrationScript.groovy 'db.properties', 'tag', 'mytag'
+
+3. Rolling back a migration
+MigrationScript.groovy 'db.properties', 'rollback',  'changeset.groovy', 'mytag' - Performs rolling back of all migrations till 'mytag' tag
+MigrationScript.groovy 'db.properties', 'rollback',  'changeset.groovy', 2 - Rolls back 2 last changesets
